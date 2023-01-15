@@ -1,6 +1,6 @@
 <template>
     <div :key="todo.id" v-for="todo in todos">
-        <Todo :todo="todo" />
+        <Todo @delete-todo="$emit('delete-todo', todo.id)" :todo="todo" />
     </div>
 </template>
 
@@ -15,5 +15,6 @@
         components: {
             Todo
         },
+        emits: ['delete-todo'],
     }
 </script>

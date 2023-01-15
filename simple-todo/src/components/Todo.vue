@@ -2,7 +2,7 @@
     <div class="task">
         <h3>
             {{ todo.text }}
-            <i class="fas fa-times"></i>
+            <i  @click="$emit('delete-todo', todo.id)" class="fas fa-times"></i>
         </h3>
         <p>{{ todo.day }}</p>
     </div>
