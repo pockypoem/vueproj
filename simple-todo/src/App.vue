@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header title="Todo List"/>
-    <Todos @delete-todo="deleteTodo" :todos="todos" />
+    <Todos @toggle-reminder="toggleReminder" @delete-todo="deleteTodo" :todos="todos" />
   </div>
 </template>
 
@@ -26,7 +26,10 @@ export default {
       if(confirm('Are you sure?')) {
         this.todos = this.todos.filter((todo) => todo.id !== id);
       }
-    }
+    },
+    toggleReminder(id) {
+      this.todos = this.todos.map((todo) => todo.id === id ? {...todo, reminder: !todo.reminder} : todo);
+    },
   },
   created() {
     this.todos = [

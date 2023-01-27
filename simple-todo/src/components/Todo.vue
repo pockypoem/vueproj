@@ -1,5 +1,5 @@
 <template>
-    <div class="task">
+    <div @dblclick="$emit('toggle-reminder', todo.id)" :class="[todo.reminder ? 'reminder' : '', 'todo']">
         <h3>
             {{ todo.text }}
             <i  @click="$emit('delete-todo', todo.id)" class="fas fa-times"></i>
@@ -22,18 +22,18 @@
     color: red;
     }
 
-    .task {
+    .todo {
         background: #f4f4f4;
         margin: 5px;
         padding: 10px 20px;
         cursor: pointer;
     }
 
-    .task.reminder {
+    .todo.reminder {
         border-left: 4px solid green;
     }
 
-    .task h3 {
+    .todo h3 {
         display: flex;
         align-items: center;
         justify-content: space-between;
