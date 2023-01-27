@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <Header title="Todo List"/>
+    <Header @toggle-add-todo="toggleAddTodo" title="Todo List" :showAddTodo="showAddTodo"/>
+    <div v-show="showAddTodo">
+      <AddTodo @add-todo="addTodo"/>
+    </div>
     <Todos @toggle-reminder="toggleReminder" @delete-todo="deleteTodo" :todos="todos" />
   </div>
 </template>
@@ -9,19 +12,28 @@
 
 import Header from './components/NavHeader';
 import Todos from './components/Todos';
+import AddTodo from './components/AddTodo';
 
 export default {
   name: 'App',
   components: {
     Header,
     Todos,
+    AddTodo
   },
   data() {
     return {
-      todos: []
+      todos: [],
+      showAddTodo: false
     }
   },
   methods: {
+    toggleAddTodo() {
+      this.showAddTodo = !this.showAddTodo;
+    },
+    addTodo(todo) {
+      this.todos = [...this.todos, todo];
+    },
     deleteTodo(id) {
       if(confirm('Are you sure?')) {
         this.todos = this.todos.filter((todo) => todo.id !== id);
